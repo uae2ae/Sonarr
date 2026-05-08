@@ -1,0 +1,17 @@
+.metadataSource {
+  composes: card from '~Components/Card.css';
+
+  width: 290px;
+}
+
+.name {
+  margin-bottom: 10px;
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.priority {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--textSecondaryColor);
+}

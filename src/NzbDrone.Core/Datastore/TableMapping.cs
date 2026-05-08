@@ -27,6 +27,7 @@ using NzbDrone.Core.Jobs;
 using NzbDrone.Core.Languages;
 using NzbDrone.Core.MediaFiles;
 using NzbDrone.Core.Messaging.Commands;
+using NzbDrone.Core.MetadataSource;
 using NzbDrone.Core.Notifications;
 using NzbDrone.Core.Organizer;
 using NzbDrone.Core.Parser.Model;
@@ -105,6 +106,11 @@ namespace NzbDrone.Core.Datastore
             Mapper.Entity<MetadataDefinition>("Metadata").RegisterModel()
                   .Ignore(x => x.ImplementationName)
                   .Ignore(d => d.Tags);
+
+            Mapper.Entity<MetadataSourceDefinition>("MetadataSources").RegisterModel()
+                  .Ignore(x => x.ImplementationName)
+                  .Ignore(x => x.Message)
+                  .Ignore(x => x.Tags);
 
             Mapper.Entity<DownloadClientDefinition>("DownloadClients").RegisterModel()
                   .Ignore(x => x.ImplementationName)

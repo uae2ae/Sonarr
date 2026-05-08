@@ -18,6 +18,7 @@ namespace NzbDrone.Core.Tv
         Series FindByTvdbId(int tvdbId);
         Series FindByTvRageId(int tvRageId);
         Series FindByImdbId(string imdbId);
+        Series FindByTmdbId(int tmdbId);
         Series FindByTitle(string title);
         Series FindByTitle(string title, int year);
         Series FindByTitleInexact(string title);
@@ -99,6 +100,11 @@ namespace NzbDrone.Core.Tv
         public Series FindByImdbId(string imdbId)
         {
             return _seriesRepository.FindByImdbId(imdbId);
+        }
+
+        public Series FindByTmdbId(int tmdbId)
+        {
+            return _seriesRepository.FindByTmdbId(tmdbId);
         }
 
         public Series FindByTitle(string title)
