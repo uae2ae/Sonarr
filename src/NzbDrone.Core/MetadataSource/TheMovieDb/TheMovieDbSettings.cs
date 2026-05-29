@@ -22,7 +22,7 @@ namespace NzbDrone.Core.MetadataSource.TheMovieDb
             ApiKey = string.Empty;
         }
 
-        [FieldDefinition(0, Label = "ApiKey", HelpText = "Your TheMovieDB API key. You can obtain one at https://www.themoviedb.org/settings/api", Type = FieldType.Password)]
+        [FieldDefinition(0, Label = "API Key", HelpText = "Your TheMovieDB API key. You can obtain one at https://www.themoviedb.org/settings/api", Type = FieldType.Password)]
         public string ApiKey { get; set; }
 
         public NzbDroneValidationResult Validate()

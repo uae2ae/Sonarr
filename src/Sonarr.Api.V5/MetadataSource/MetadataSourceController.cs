@@ -25,14 +25,14 @@ public class MetadataSourceController : ProviderControllerBase<MetadataSourceRes
             .WithMessage("Priority must be between 1 and 50");
 
         SharedValidator.RuleFor(c => c.Enable)
-            .Must(enable =>
+            .Must((resource, enable) =>
             {
                 if (enable)
                 {
                     return true;
                 }
 
-                return _metadataSourceFactory.All().Count(d => d.Enable) > 1;
+                return _metadataSourceFactory.All().Count(d => d.Enable && d.Id != resource.Id) >= 1;
             })
             .WithMessage("At least one metadata source must be enabled.");
     }

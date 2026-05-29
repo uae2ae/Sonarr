@@ -13,6 +13,7 @@ using NzbDrone.Core.Languages;
 using NzbDrone.Core.MediaCover;
 using NzbDrone.Core.MetadataSource.TheMovieDb.Resource;
 using NzbDrone.Core.Parser;
+using NzbDrone.Core.ThingiProvider;
 using NzbDrone.Core.Tv;
 
 namespace NzbDrone.Core.MetadataSource.TheMovieDb
@@ -36,6 +37,19 @@ namespace NzbDrone.Core.MetadataSource.TheMovieDb
         }
 
         public override string Name => "TheMovieDB";
+
+        public override IEnumerable<ProviderDefinition> DefaultDefinitions =>
+            new List<ProviderDefinition>
+            {
+                new MetadataSourceDefinition
+                {
+                    Name = "TheMovieDB",
+                    Implementation = GetType().Name,
+                    Settings = new TheMovieDbSettings(),
+                    Enable = false,
+                    Priority = 3
+                }
+            };
 
         public override Tuple<Series, List<Episode>> GetSeriesInfo(int tvdbId, int tmdbId)
         {
@@ -82,7 +96,7 @@ namespace NzbDrone.Core.MetadataSource.TheMovieDb
 
             if (title.IsPathValid(PathValidationType.AnyOs))
             {
-                throw new SkyHook.InvalidSearchTermException("Invalid search term '{0}'", title);
+                throw new InvalidSearchTermException("Invalid search term '{0}'", title);
             }
 
             try

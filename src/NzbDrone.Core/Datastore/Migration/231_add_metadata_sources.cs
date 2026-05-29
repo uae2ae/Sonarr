@@ -16,7 +16,7 @@ namespace NzbDrone.Core.Datastore.Migration
                   .WithColumn("Enable").AsBoolean().NotNullable().WithDefaultValue(true)
                   .WithColumn("Priority").AsInt32().NotNullable().WithDefaultValue(1);
 
-            // Insert the default SkyHook (TheTVDB) source
+            // Insert default sources: TheTVDB (priority 1, enabled), TVmaze (priority 2, enabled), TheMovieDB (priority 3, disabled until API key is set)
             Insert.IntoTable("MetadataSources").Row(new
             {
                 Name = "TheTVDB",
@@ -25,6 +25,26 @@ namespace NzbDrone.Core.Datastore.Migration
                 ConfigContract = "NullConfig",
                 Enable = true,
                 Priority = 1
+            });
+
+            Insert.IntoTable("MetadataSources").Row(new
+            {
+                Name = "TVmaze",
+                Implementation = "TvMazeProxy",
+                Settings = "{}",
+                ConfigContract = "NullConfig",
+                Enable = true,
+                Priority = 2
+            });
+
+            Insert.IntoTable("MetadataSources").Row(new
+            {
+                Name = "TheMovieDB",
+                Implementation = "TheMovieDbProxy",
+                Settings = "{\"ApiKey\":\"\"}",
+                ConfigContract = "TheMovieDbSettings",
+                Enable = false,
+                Priority = 3
             });
         }
     }
